@@ -22,13 +22,16 @@ const angela = {
 const people = [ian, irvin, angela];
 
 function getPeople(req, res) {
+    if (!req.query.name) {
+        res.send(people);
+    }
 
-    res.send(people);
+
 }
 
 function addPeople(req, res) {
     const name = req.query.name;
-    const age = req.query.age;
+    const age = parseInt(req.query.age);
     const city = req.query.city;
     people.push({
         name: name,
@@ -40,7 +43,7 @@ function addPeople(req, res) {
 
 app.get("/people", getPeople);
 
-app.get("/req", addPeople);
+app.post("/people", addPeople);
 
 app.listen(3000, () => {
     console.log('server listening on port 3000');
