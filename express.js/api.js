@@ -22,9 +22,24 @@ const angela = {
 const people = [ian, irvin, angela];
 
 function getPeople(req, res) {
-    if (!req.query.name) {
+    let result;
+    if (req.query.name) {
+        people.forEach(element => {
+            if (element.name == req.query.name) {
+                result = element;
+            } 
+        });
+    } else {
         res.send(people);
     }
+
+    // if (result) {
+    //     res.send(result);
+    // } else {
+    //     res.send("Do not contain this person");
+
+    // }
+    result?res.send(result):res.send("Do not contain this person");
 
 
 }
