@@ -9,9 +9,10 @@ const {
 const validateId = require('../middleware/validateId');
 const router = express.Router();
 
-// localhost:3000/posts
+// GET localhost:3000/posts
 router.get('', getAllPost);
 router.post('', addPost);
+// GET localhost:3000/posts/:id
 router.get('/:id', validateId, getPostById);
 router.put('/:id', validateId, updatePostById);
 router.delete('/:id', validateId, deletePostById);
