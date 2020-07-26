@@ -4,13 +4,19 @@ const app = express();
 // body-parser
 app.use(express.json());
 
+// function json() {
+//   return (req, res, next) => { };
+// }
+// app.use(json());
+
 const people = [];
 
 app.use((req, res, next) => {
-  res.setHeader('X-time', new Date());
+  res.setHeader('Allow-Access-From-Origin', '*');
   next();
 });
 
+// route handler
 app.get('/people', (req, res) => {
   const { name } = req.query;
   if (name) {
