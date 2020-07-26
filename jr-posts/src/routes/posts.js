@@ -6,13 +6,14 @@ const {
   deletePostById,
   addPost
 } = require('../controllers/posts');
+const validateId = require('../middleware/validateId');
 const router = express.Router();
 
 // localhost:3000/posts
 router.get('', getAllPost);
 router.post('', addPost);
-router.get('/:id', getPostById);
-router.put('/:id', updatePostById);
-router.delete('/:id', deletePostById);
+router.get('/:id', validateId, getPostById);
+router.put('/:id', validateId, updatePostById);
+router.delete('/:id', validateId, deletePostById);
 
 module.exports = router;

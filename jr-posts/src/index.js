@@ -9,6 +9,8 @@ app.use(express.json());
 //   res.setHeader('Access-Control-Allow-Origin', '*');
 //   next();
 // });
+
+// /
 app.use(routes);
 
 app.listen(3000, () => {
