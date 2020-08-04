@@ -6,5 +6,3 @@
 // L — Liskov substitution principle    | 里氏替换
 // I — Interface segregation principle  | 接口隔离
 // D - Dependency inversion principle    | 依赖注入
-
-
