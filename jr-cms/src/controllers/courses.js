@@ -1,10 +1,69 @@
 const Course = require('../models/course');
+// const Joi = require('joi');
+// express-async-errors
+// function tryCatch(routeHandler) {
+//   return (req, res, next) => {
+//     try {
+//       routeHandler(req, res, next);
+//     } catch (e) {
+//       next(e);
+//     }
+//   }
+// }
+
+// const asyncHandler = (fn) => (req, res, next) => {
+//   return Promise.resolve(fn(req, res, next)).catch(next);
+// };
 
 async function addCourse(req, res) {
   const { name, code, description } = req.body;
   // validate user input, params
+  // const schema = Joi.object({
+  //   name: Joi.string().min(2).max(10).required(),
+  //   // a-z A-Z 0-9
+  //   code: Joi.string()
+  //     .regex(/^[a-zA-Z0-9]+$/)
+  //     .required(),
+  //   description: Joi.string()
+  // });
+  // const data = await schema.validateAsync(req.body, {
+  //   allowUnknown: true,
+  //   stripUnknown: true
+  // });
+  const existingCourse = await Course.findById(code).exec();
+  if (existingCourse) {
+    return res.status(409).json('Duplicate course code');
+  }
+
+  next(new CustomError('xxxxx'));
   const course = new Course({ code, name, description });
   await course.save();
+
+  // try {
+  //   await course.save();
+  // } catch (e) {
+  //   next(e);
+  //   return;
+  // }
+
+  // course.save((error, result) => {
+  //   if (error) {
+  //     next(error);
+  //     return res.status(400).json(error);
+  //   }
+  //   return res.json(result);
+  // })
+
+  // course
+  //   .save()
+  //   .then((result) => {
+  //     return res.json(result);
+  //   })
+  //   .catch((error) => {
+  //     next(error);
+  //     return res.status(400).json(error);
+  //   });
+
   return res.status(201).json(course);
 }
 
