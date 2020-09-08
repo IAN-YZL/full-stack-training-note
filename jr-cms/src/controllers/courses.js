@@ -10,7 +10,7 @@ async function addCourse(req, res) {
 
 async function getCourse(req, res) {
   const { id: code } = req.params;
-  const course = await Course.findById(code);
+  const course = await Course.findById(code).exec();
   if (!course) {
     return res.status(404).json('course not found');
   }
@@ -38,7 +38,7 @@ async function updateCourse(req, res) {
     code,
     { name, description },
     { new: true }
-  );
+  ).exec();
 
   //
   // const course = await Course.findById(code);
@@ -53,7 +53,7 @@ async function updateCourse(req, res) {
 }
 async function deleteCourse(req, res) {
   const { id: code } = req.params;
-  const course = await Course.findByIdAndDelete(code);
+  const course = await Course.findByIdAndDelete(code).exec();
 
   if (!course) {
     return res.status(404).json('course not found');

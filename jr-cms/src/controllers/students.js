@@ -9,7 +9,7 @@ async function addStudent(req, res) {
 
 async function getStudent(req, res) {
   const { id: studentID } = req.params;
-  const student = await Student.findById(studentID);
+  const student = await Student.findById(studentID).exec();
   if (!student) {
     return res.status(404).json("Student cannot find");
   }
@@ -28,7 +28,7 @@ async function updateStudent(req, res) {
     studentID,
     { firstName, lastName, email },
     {new: true}
-  );
+  ).exec();
 
   if (!student) {
     return res.status(404).json('The student does not exist!');
@@ -39,7 +39,7 @@ async function updateStudent(req, res) {
 
 async function deleteStudent(req, res) {
   const { id: studentID } = req.params;
-  const student = await Student.findByIdAndDelete(studentID);
+  const student = await Student.findByIdAndDelete(studentID).exec();
 
   if (!student) {
     return res.status(404).json("The student does not exist!");  
