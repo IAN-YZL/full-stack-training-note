@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
+const Course = require('./course');
 
 const schema = new mongoose.Schema(
     {
-        _id: {
-            type: String,
-            alias: 'studentID'
-        },
         firstName: {
             type: String,
             required: true
@@ -18,13 +15,11 @@ const schema = new mongoose.Schema(
             type: String,
             required: true
         },
-        courses: [{type: String, ref: Course}],
-    },
-    {
-        toJSON: {
-            virtuals: true
+        __v: {
+            type: Number,
+            select: false
         },
-        id: false
+        courses: [{type: String, ref: 'Course'}],
     }
 );
 
