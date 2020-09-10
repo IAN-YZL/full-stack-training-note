@@ -1,5 +1,5 @@
 const Course = require('../models/course');
-// const Joi = require('joi');
+const Joi = require('joi');
 // express-async-errors
 // function tryCatch(routeHandler) {
 //   return (req, res, next) => {
@@ -18,14 +18,14 @@ const Course = require('../models/course');
 async function addCourse(req, res) {
   const { name, code, description } = req.body;
   // validate user input, params
-  // const schema = Joi.object({
-  //   name: Joi.string().min(2).max(10).required(),
-  //   // a-z A-Z 0-9
-  //   code: Joi.string()
-  //     .regex(/^[a-zA-Z0-9]+$/)
-  //     .required(),
-  //   description: Joi.string()
-  // });
+  const schema = Joi.object({
+    name: Joi.string().length(8).required(),
+    // a-z A-Z 0-9
+    code: Joi.string()
+      .regex(/^[a-zA-Z0-9]+$/)
+      .required(),
+    description: Joi.string()
+  });
   // const data = await schema.validateAsync(req.body, {
   //   allowUnknown: true,
   //   stripUnknown: true

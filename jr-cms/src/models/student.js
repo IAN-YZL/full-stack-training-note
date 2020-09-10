@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Course = require('./course');
+const Joi = require('joi');
 
 const schema = new mongoose.Schema(
     {
@@ -13,7 +13,11 @@ const schema = new mongoose.Schema(
         },
         email: {
             type: String,
-            required: true
+            required: true,
+            validate: {
+                validator: (email) => !Joi.string().email().validate(email).error,
+                msg: "Invalid email format"
+            }
         },
         __v: {
             type: Number,
