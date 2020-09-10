@@ -18,6 +18,7 @@ const schema = new mongoose.Schema(
             type: String,
             required: true
         },
+        courses: [{type: String, ref: Course}],
     },
     {
         toJSON: {
